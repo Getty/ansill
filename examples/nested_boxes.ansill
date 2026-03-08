@@ -1,0 +1,7 @@
+ansill 0.2
+canvas 24x9
+profile ascii
+
+box 1,1 24,9 style=single
+box 3,2 22,8 style=single
+text 8,5 "NESTED"

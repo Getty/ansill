@@ -1,0 +1,12 @@
+ansill 0.2
+canvas 31x11
+profile ascii
+
+box 1,1 15,6 style=single
+box 17,1 31,6 style=single
+box 1,6 15,11 style=single
+box 17,6 31,11 style=single
+text 6,3 "A"
+text 22,3 "B"
+text 6,8 "C"
+text 22,8 "D"

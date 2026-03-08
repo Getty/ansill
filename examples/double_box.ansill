@@ -1,0 +1,6 @@
+ansill 0.2
+canvas 20x5
+profile cp437
+
+box 1,1 20,5 style=double
+text 3,3 "DOUBLE!"

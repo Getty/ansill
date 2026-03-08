@@ -1,0 +1,29 @@
+ansill 0.2
+canvas 80x25
+profile cp437
+colors ansi16
+policy warn-fallback
+
+palette retro {
+  title-fg = bright-white
+  title-bg = blue
+  border   = bright-cyan
+  panel    = bright-green
+  subtle   = bright-black
+}
+
+style titlebar {
+  fg = title-fg
+  bg = title-bg
+  bold = true
+}
+
+fill 1,1 80,25 glyph=" " fg=white bg=black
+box 1,1 80,25 style=double fg=border bg=title-bg
+text 3,2 "WELCOME TO HANDY INTELLIGENCE" style=titlebar
+panel 3,5 35,14 style=single title="STATUS" fg=panel bg=black
+fill 5,7 20,12 glyph=shade-light fg=green bg=black
+text 5,16 "[ESC] Quit" fg=subtle
+
+meta title = "WELCOME"
+meta author = "Getty"

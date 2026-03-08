@@ -1,0 +1,111 @@
+#!/usr/bin/env perl
+# PODNAME: ansill
+# ABSTRACT: ANSILL compiler - ANSI Layout Language
+
+use strict;
+use warnings;
+use utf8;
+use Getopt::Long;
+use ANSILL;
+
+my $command = shift @ARGV // 'help';
+my %opts;
+
+GetOptions(
+  'output|o=s'  => \$opts{output},
+  'backend|b=s' => \$opts{backend},
+  'profile|p=s' => \$opts{profile},
+  'policy=s'    => \$opts{policy},
+) or die "Error in command line arguments\n";
+
+if ($command eq 'compile') {
+  my $file = shift @ARGV or die "Usage: ansill compile <file.ansill> [-o output]\n";
+  my $backend = $opts{backend} // _guess_backend($opts{output});
+
+  my $output = ANSILL->compile_file($file, backend => $backend);
+
+  if ($opts{output}) {
+    open my $fh, '>:utf8', $opts{output}
+      or die "Cannot write to '$opts{output}': $!\n";
+    print $fh $output;
+    close $fh;
+    print STDERR "Compiled $file -> $opts{output}\n";
+  } else {
+    binmode STDOUT, ':utf8';
+    print $output;
+  }
+}
+elsif ($command eq 'validate') {
+  my $file = shift @ARGV or die "Usage: ansill validate <file.ansill>\n";
+  open my $fh, '<:utf8', $file or die "Cannot open '$file': $!\n";
+  my $source = do { local $/; <$fh> };
+  close $fh;
+
+  my $ansill = ANSILL->new(source => $source, backend => 'plaintext');
+  my $diags = $ansill->validate;
+
+  if (@$diags) {
+    for my $d (@$diags) {
+      my $line = $d->{line} ? " (line $d->{line})" : '';
+      print STDERR "$d->{level}$line: $d->{message}\n";
+    }
+    my $errors = grep { $_->{level} eq 'error' } @$diags;
+    exit 1 if $errors;
+  } else {
+    print STDERR "OK: $file validates cleanly\n";
+  }
+}
+elsif ($command eq 'info') {
+  my $file = shift @ARGV or die "Usage: ansill info <file.ansill>\n";
+  open my $fh, '<:utf8', $file or die "Cannot open '$file': $!\n";
+  my $source = do { local $/; <$fh> };
+  close $fh;
+
+  my $ansill = ANSILL->new(source => $source, backend => 'plaintext');
+  # Force resolution
+  $ansill->_commands;
+  my $r = $ansill->_resolver;
+
+  print "Canvas:  ${\$r->canvas_width}x${\$r->canvas_height}\n";
+  print "Profile: ${\$r->profile_name}\n";
+  print "Colors:  ${\$r->color_system}\n";
+  print "Policy:  ${\$r->policy_level}\n";
+
+  if (keys %{$r->meta}) {
+    print "Meta:\n";
+    for my $k (sort keys %{$r->meta}) {
+      print "  $k = $r->{meta}{$k}\n";
+    }
+  }
+}
+elsif ($command eq 'help' || $command eq '--help') {
+  print <<'USAGE';
+ansill - ANSI Layout Language compiler
+
+Commands:
+  ansill compile <file.ansill> [-o output] [-b backend]
+  ansill validate <file.ansill>
+  ansill info <file.ansill>
+
+Options:
+  -o, --output   Output file path
+  -b, --backend  Backend: ansi, plaintext, json, html (default: ansi)
+
+Examples:
+  ansill compile intro.ansill -o intro.ans
+  ansill compile intro.ansill -o intro.html -b html
+  ansill validate intro.ansill
+USAGE
+}
+else {
+  die "Unknown command: '$command'. Try 'ansill help'.\n";
+}
+
+sub _guess_backend {
+  my ($file) = @_;
+  return 'ansi' unless $file;
+  return 'html'      if $file =~ /\.html?$/;
+  return 'json'      if $file =~ /\.json$/;
+  return 'plaintext' if $file =~ /\.txt$/;
+  return 'ansi';
+}

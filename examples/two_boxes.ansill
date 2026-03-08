@@ -1,0 +1,8 @@
+ansill 0.2
+canvas 31x7
+profile ascii
+
+box 1,1 15,7 style=single
+box 17,1 31,7 style=single
+text 4,4 "LEFT"
+text 20,4 "RIGHT"

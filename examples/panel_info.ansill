@@ -1,0 +1,7 @@
+ansill 0.2
+canvas 30x7
+profile ascii
+
+panel 1,1 30,7 style=single title="INFO"
+text 3,3 "Status: OK"
+text 3,4 "Items: 42"

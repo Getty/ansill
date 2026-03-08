@@ -1,0 +1,7 @@
+ansill 0.2
+canvas 20x5
+profile ascii
+
+fill 1,1 20,5 glyph="."
+box 3,1 18,5 style=single
+text 6,3 "OVERLAY"

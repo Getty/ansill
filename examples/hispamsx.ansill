@@ -1,0 +1,194 @@
+ansill 0.2
+canvas 80x25
+profile cp437
+colors ansi16
+
+# ============================================================
+# HispaMSX BBS Main Menu - pixel-perfect recreation
+# ============================================================
+
+# === Black background ===
+fill 1,1 80,25 glyph=" " fg=7 bg=0
+
+# ============================================================
+# LOGO AREA (rows 1-3) - half-block pixel technique
+# Each cell = 2 vertical pixels (top=bg half, bottom=fg half for ▄)
+# ============================================================
+
+# --- HISPA (bright-yellow fg=11 bg=0) ---
+# H: columns 2-5
+text 2,1  "▄ ▄" fg=11 bg=0
+text 2,2  "███" fg=11 bg=0
+text 2,3  "▀ ▀" fg=11 bg=0
+
+# I: column 7
+text 7,1  "▄" fg=11 bg=0
+text 7,2  "█" fg=11 bg=0
+text 7,3  "▀" fg=11 bg=0
+
+# S: columns 9-11
+text 9,1  "▄▄▄" fg=11 bg=0
+text 9,2  "▀▄▄" fg=11 bg=0
+text 9,3  "▄▄▀" fg=11 bg=0
+
+# P: columns 13-15
+text 13,1 "▄▄▄" fg=11 bg=0
+text 13,2 "█▀▀" fg=11 bg=0
+text 13,3 "▀" fg=11 bg=0
+
+# A: columns 17-19
+text 17,1 " ▄ " fg=11 bg=0
+text 17,2 "█▀█" fg=11 bg=0
+text 17,3 "▀ ▀" fg=11 bg=0
+
+# --- MSX (bright-cyan fg=14 bg=0) ---
+# M: columns 21-27
+text 21,1 "▄▄ ▄▄" fg=14 bg=0
+text 21,2 "█▀█▀█" fg=14 bg=0
+text 21,3 "▀   ▀" fg=14 bg=0
+
+# S: columns 29-32
+text 29,1 "▄▄▄▄" fg=14 bg=0
+text 29,2 "▀▄▄▄" fg=14 bg=0
+text 29,3 "▄▄▄▀" fg=14 bg=0
+
+# X: columns 34-39
+text 34,1 "▄   ▄" fg=14 bg=0
+text 34,2 " ▀▄▀ " fg=14 bg=0
+text 34,3 "▄▀ ▀▄" fg=14 bg=0
+
+# === Header text (right side) ===
+text 42,1 "Local Time: 00:25" fg=10 bg=0
+text 65,1 "HispaMSX BBS" fg=15 bg=0
+text 42,2 "Press ? anywhere to get online help" fg=7 bg=0
+
+# === Blue menu area (rows 4-23) ===
+fill 1,4 80,23 glyph=" " fg=15 bg=1
+
+# === Section headers (row 5) ===
+text 5,5  "■ Read/Post Messages" fg=15 bg=1
+text 28,5 "■ Message Area Selection" fg=15 bg=1
+text 55,5 "■ Electronic Mail" fg=15 bg=1
+
+# =============================================================
+# LEFT COLUMN: Read/Post Messages (box rows 7-15)
+# =============================================================
+box 3,7 26,15 style=single fg=14 bg=1
+
+text 5,8  "N" fg=11 bg=1
+text 7,8  "New message scan" fg=14 bg=1
+
+text 5,9  "R" fg=11 bg=1
+text 7,9  "Read message prompt" fg=14 bg=1
+
+text 5,10 "Z" fg=11 bg=1
+text 7,10 "Continuous new scan" fg=14 bg=1
+
+text 5,11 "B" fg=11 bg=1
+text 7,11 "Browse new scan" fg=14 bg=1
+
+text 5,12 "Q" fg=11 bg=1
+text 7,12 "QWK packet transfer" fg=14 bg=1
+
+text 5,13 "P" fg=11 bg=1
+text 7,13 "Post a message" fg=14 bg=1
+
+text 5,14 "A" fg=11 bg=1
+text 7,14 "Post auto-message" fg=14 bg=1
+
+# =============================================================
+# MIDDLE COLUMN: Message Area Selection
+# =============================================================
+text 28,8  "J" fg=11 bg=1
+text 31,8  "Jump to new msg area" fg=14 bg=1
+
+text 30,9  "*" fg=11 bg=1
+text 32,9  "List sub-boards" fg=14 bg=1
+
+text 30,10 "#" fg=11 bg=1
+text 32,10 "List groups" fg=14 bg=1
+
+text 28,11 "{ }  #" fg=11 bg=1
+text 35,11 "Select sub-board" fg=14 bg=1
+
+text 28,12 "[ ] /#" fg=11 bg=1
+text 35,12 "Select group" fg=14 bg=1
+
+# === Go to (row 14, below Message Area Selection) ===
+text 28,14 "■ Go to" fg=15 bg=1
+
+text 28,16 "T" fg=11 bg=1
+text 30,16 "File Transfer section" fg=14 bg=1
+
+text 28,17 "G" fg=11 bg=1
+text 30,17 "Text file section" fg=14 bg=1
+
+text 28,18 "C" fg=11 bg=1
+text 30,18 "Chat section" fg=14 bg=1
+
+text 28,19 "X" fg=11 bg=1
+text 30,19 "External programs" fg=14 bg=1
+
+# =============================================================
+# RIGHT COLUMN: Electronic Mail + Other Commands
+# =============================================================
+text 57,8  "E" fg=11 bg=1
+text 59,8  "Read/Send E-mail" fg=14 bg=1
+
+text 55,10 "■ Other Commands" fg=15 bg=1
+
+text 57,12 "D" fg=11 bg=1
+text 61,12 "Default user config" fg=14 bg=1
+
+text 57,13 "&" fg=11 bg=1
+text 61,13 "Message scan config" fg=14 bg=1
+
+text 57,14 "U" fg=11 bg=1
+text 61,14 "User Lists" fg=14 bg=1
+
+text 57,15 "I" fg=11 bg=1
+text 61,15 "Information" fg=14 bg=1
+
+text 57,16 "M" fg=11 bg=1
+text 61,16 "Minute Bank" fg=14 bg=1
+
+text 56,17 "/L" fg=11 bg=1
+text 61,17 "Node activity" fg=14 bg=1
+
+text 56,18 "^K" fg=11 bg=1
+text 61,18 "Ctrl-key Menu" fg=14 bg=1
+
+text 57,19 "O" fg=11 bg=1
+text 61,19 "Logoff BBS (or /O)" fg=14 bg=1
+
+text 61,20 "!=Sysop Menu" fg=14 bg=1
+
+# =============================================================
+# LEFT COLUMN: Message Search (box rows 17-20)
+# =============================================================
+text 5,16 "■ Message Search" fg=15 bg=1
+
+box 3,17 26,20 style=single fg=14 bg=1
+
+text 5,18 "F" fg=11 bg=1
+text 7,18 "Find text in messages" fg=14 bg=1
+
+text 5,19 "S" fg=11 bg=1
+text 7,19 "Scan for msgs to you" fg=14 bg=1
+
+# =============================================================
+# STATUS BAR (row 23)
+# =============================================================
+text 2,23 "Anytime | Ctrl-U Who's online Ctrl-P Send private msg Ctrl-C Abort cmd/text" fg=14 bg=1
+
+# =============================================================
+# BOTTOM PROMPT (rows 24-25, black background)
+# =============================================================
+fill 1,24 80,25 glyph=" " fg=7 bg=0
+
+text 3,25 "Main ■ 0:02:24 [2] International [2] Main:" fg=15 bg=0
+
+# === Metadata ===
+meta title = "HispaMSX BBS Main Menu"
+meta author = "HispaMSX"
+meta group = "HispaMSX"

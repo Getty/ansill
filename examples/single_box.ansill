@@ -1,0 +1,6 @@
+ansill 0.2
+canvas 20x5
+profile ascii
+
+box 1,1 20,5 style=single
+text 4,3 "HELLO"
