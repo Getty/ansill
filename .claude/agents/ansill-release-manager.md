@@ -10,7 +10,7 @@ briefing:
     - getty-perl-distribution
     - perl-release-dist-ini
     - ansill-core
-    - kanban-issues-karr-coordination
+    - kanban-issues-karr-ticket
 ---
 
 You are the `ansill-release-manager` for **ansill**, the CPAN distribution
