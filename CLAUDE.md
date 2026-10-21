@@ -1,46 +1,55 @@
-# ANSILL - ANSI Layout Language
+# CLAUDE.md — ANSILL
 
-Perl implementation of the ANSILL specification (v0.2).
+**ANSILL is a declarative text-mode layout language.** A small line-oriented
+language compiles to a 2D cell grid and is emitted as ANSI escape sequences,
+plain text, JSON or HTML. The Perl distribution `ANSILL` implements the
+language specification in `spec/ANSILL.md` (v0.2).
 
-## Project Structure
+The compiler runs five stages — parse → resolve → render → validate → emit —
+one module each. **The specification is the language definition, the code is the
+implementation**; where the two differ, that is a finding for the maintainer,
+not a licence to quietly align one to the other.
 
-```
-lib/ANSILL.pm                    # Main module, entry point
-lib/ANSILL/Parser.pm             # Parse .ansill source into AST
-lib/ANSILL/AST.pm                # AST node definitions
-lib/ANSILL/Resolver.pm           # Resolve styles, palettes, symbols, macros, imports
-lib/ANSILL/Grid.pm               # 2D cell grid
-lib/ANSILL/Cell.pm               # Single cell (glyph, fg, bg, attrs)
-lib/ANSILL/Profile.pm            # Profile definitions + abstract glyph mapping
-lib/ANSILL/Profile/ASCII.pm      # ASCII profile
-lib/ANSILL/Profile/CP437.pm      # CP437 profile
-lib/ANSILL/Profile/Unicode.pm    # Unicode profile
-lib/ANSILL/Color.pm              # Color parsing, naming, degradation
-lib/ANSILL/Renderer.pm           # Render resolved AST into Grid
-lib/ANSILL/Validator.pm          # Validate grid against profile/policy
-lib/ANSILL/Backend/ANSI.pm       # ANSI escape sequence output
-lib/ANSILL/Backend/PlainText.pm  # Plain text output
-lib/ANSILL/Backend/JSON.pm       # JSON cell grid export
-lib/ANSILL/Backend/HTML.pm       # HTML preview output
-bin/ansill                       # CLI tool
-spec/ANSILL.md                   # Language specification
-```
+**`dist.ini` is the truth for the build and the release.** It carries the name
+and the `[@Author::GETTY]` bundle; `cpanfile` is generated from it and is never
+edited by hand.
 
-## Build System
+Project knowledge — the pipeline, the cell and color model, the profiles, the
+language surface, the backends, the known drift — lives in skill `ansill-core`.
 
-Uses Dist::Zilla with `[@Author::GETTY]` bundle.
+## Delegation
 
-## Testing
+Delegate behavior-relevant code to the right agent instead of touching it
+yourself — principle and lane are in `.claude/rules/ansill-rules.md`.
+
+| Task | Agent |
+|---|---|
+| Implement / refactor / debug the parser, resolver, renderer, validator, grid, profiles, backends, CLI | `ansill-worker` (default) |
+| Write/extend the tests under `t/` | `ansill-test-writer` |
+| Commits, `Changes`, card → done, pre-release audit | `ansill-release-manager` |
+
+The agents carry their skills via `briefing.skills` (see `.claude/agents/`); the
+main agent delegates rather than loading them. Skill sources live under
+`.claude/skills/`.
+
+## Tests
 
 ```bash
-prove -l t/
-prove -lv t/specific_test.t
+prove -l t/               # the suite: 7 files, 107 tests
+prove -lv t/05_parser.t   # one file, verbose
 ```
 
-## Dependencies
+`prove -l` is mandatory: without it the installed `ANSILL` release is loaded
+instead of `lib/`. `dzil build` and `dzil test` currently abort — the
+distribution has no `LICENSE` file yet.
 
-- Moo (lightweight OOP)
-- Types::Standard
-- JSON::MaybeXS (for JSON backend)
-- MooX::Options (for CLI)
-- namespace::autoclean
+## Skills
+
+| Skill | Source | Purpose |
+|---|---|---|
+| `ansill-core` | this repository | project knowledge — architecture, language surface, known drift |
+| `getty-perl-core`, `getty-perl-moo`, `getty-perl-distribution`, `getty-git-commit-style`, `getty-git-usage`, `perl-release-dist-ini` | installed by `skilletor` | shared library conventions |
+| `kanban-issues-karr-coordination`, `kanban-issues-karr-ticket` | installed by `skilletor` | the karr board |
+
+The installed skills are build artefacts of `skilletor sync` — never edit them
+here; change the source.

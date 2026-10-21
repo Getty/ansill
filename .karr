@@ -1,0 +1,11 @@
+claude: true
+prompt: >
+  You are working on ansill, the Perl implementation of the ANSILL layout
+  language. Read .claude/rules/ansill-rules.md, then pick the
+  highest-priority actionable ticket from the karr board (`karr board`), claim
+  it, and complete it via the ansill-worker agent. The compiler runs five
+  stages — parse, resolve, render, validate, emit — and the language
+  definition lives in spec/ANSILL.md. Verify with `prove -l t/`; the `-l` is
+  mandatory, without it the installed release is loaded instead of lib/.
+  dist.ini is the build truth; cpanfile is generated from it. Never run `dzil
+  release`, never tag, never push, never upload to CPAN.
