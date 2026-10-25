@@ -20,7 +20,8 @@ language surface, the backends, the known drift — lives in skill `ansill-core`
 ## Delegation
 
 Delegate behavior-relevant code to the right agent instead of touching it
-yourself — principle and lane are in `.claude/rules/ansill-rules.md`.
+yourself — principle in the shared house rules (skilletor bundle
+`getty-cpan-dist@getty`), lanes in `.claude/rules/ansill-rules.md`.
 
 | Task | Agent |
 |---|---|
