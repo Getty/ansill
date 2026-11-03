@@ -1,6 +1,8 @@
 package ANSILL::Profile::CP437;
 # ABSTRACT: CP437 profile - classic DOS/BBS character set
 
+our $VERSION = '0.001';
+
 use Moo;
 use utf8;
 extends 'ANSILL::Profile';

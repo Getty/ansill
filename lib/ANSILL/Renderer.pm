@@ -1,6 +1,8 @@
 package ANSILL::Renderer;
 # ABSTRACT: Render resolved ANSILL commands into a Grid
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( InstanceOf );
 use ANSILL::Grid;

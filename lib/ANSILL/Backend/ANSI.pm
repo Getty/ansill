@@ -1,6 +1,8 @@
 package ANSILL::Backend::ANSI;
 # ABSTRACT: ANSI escape sequence backend for ANSILL
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( InstanceOf Str Bool );
 

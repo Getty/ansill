@@ -1,6 +1,8 @@
 package ANSILL::Parser;
 # ABSTRACT: Line-oriented parser for ANSILL source files
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( Str ArrayRef );
 use ANSILL::AST;

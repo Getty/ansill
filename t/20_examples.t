@@ -1,3 +1,4 @@
+#!/usr/bin/env perl
 use strict;
 use warnings;
 use utf8;
@@ -6,8 +7,6 @@ use File::Basename qw( basename );
 use ANSILL;
 
 my @examples = glob("examples/*.ansill");
-
-plan tests => scalar @examples;
 
 for my $file (sort @examples) {
   my $name = basename($file, '.ansill');
@@ -25,3 +24,5 @@ for my $file (sort @examples) {
     is($got, $expected, "$name renders correctly");
   }
 }
+
+done_testing;

@@ -1,6 +1,6 @@
 # Dist::Zilla build directories
-ANSILL-*
-.build
+/ANSILL-*
+.build/
 build/
 
 # Extracted build artefacts

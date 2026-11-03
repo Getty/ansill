@@ -1,6 +1,8 @@
 package ANSILL::Profile::ASCII;
 # ABSTRACT: ASCII profile - strict printable ASCII only
 
+our $VERSION = '0.001';
+
 use Moo;
 extends 'ANSILL::Profile';
 

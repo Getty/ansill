@@ -1,0 +1,8 @@
+Revision history for ANSILL
+
+{{$NEXT}}
+  - First release of the ANSILL layout language compiler
+  - Compiles a declarative text-mode layout (parse, resolve, render, validate, emit) to a 2D cell grid
+  - Backends for ANSI escape sequences, plain text, JSON and HTML
+  - Unicode, CP437 and ASCII profiles
+  - Command line tool "ansill" with compile, validate and info

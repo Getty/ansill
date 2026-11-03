@@ -1,6 +1,8 @@
 package ANSILL::Grid;
 # ABSTRACT: 2D cell grid for ANSILL rendering
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( Int ArrayRef Str );
 use ANSILL::Cell;

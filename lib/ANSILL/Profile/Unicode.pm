@@ -1,6 +1,8 @@
 package ANSILL::Profile::Unicode;
 # ABSTRACT: Unicode profile - modern terminal safe subset
 
+our $VERSION = '0.001';
+
 use Moo;
 use utf8;
 extends 'ANSILL::Profile';

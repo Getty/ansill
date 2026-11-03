@@ -1,6 +1,8 @@
 package ANSILL::Cell;
 # ABSTRACT: Single cell in an ANSILL grid
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( Str Int Bool Maybe );
 

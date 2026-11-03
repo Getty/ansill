@@ -1,6 +1,8 @@
 package ANSILL::Profile;
 # ABSTRACT: Base profile for abstract glyph mapping in ANSILL
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( Str HashRef );
 use Carp qw( croak );

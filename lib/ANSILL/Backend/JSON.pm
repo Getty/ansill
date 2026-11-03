@@ -1,6 +1,8 @@
 package ANSILL::Backend::JSON;
 # ABSTRACT: JSON cell grid export backend for ANSILL
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( InstanceOf );
 use JSON::MaybeXS qw( encode_json );

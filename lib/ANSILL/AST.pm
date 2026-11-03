@@ -1,6 +1,8 @@
 package ANSILL::AST;
 # ABSTRACT: AST node types for ANSILL documents
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( Str Int ArrayRef HashRef Maybe );
 

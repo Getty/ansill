@@ -1,6 +1,8 @@
 package ANSILL::Validator;
 # ABSTRACT: Validate ANSILL grid and AST against profile and policy
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( Str InstanceOf ArrayRef );
 use Carp qw( croak );

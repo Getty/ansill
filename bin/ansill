@@ -2,6 +2,8 @@
 # PODNAME: ansill
 # ABSTRACT: ANSILL compiler - ANSI Layout Language
 
+our $VERSION = '0.001';
+
 use strict;
 use warnings;
 use utf8;

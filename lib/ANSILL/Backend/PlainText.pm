@@ -1,6 +1,8 @@
 package ANSILL::Backend::PlainText;
 # ABSTRACT: Plain text backend for ANSILL - glyph grid without escape sequences
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( InstanceOf );
 

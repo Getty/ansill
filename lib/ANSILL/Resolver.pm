@@ -1,6 +1,8 @@
 package ANSILL::Resolver;
 # ABSTRACT: Resolve styles, palettes, symbols, macros in ANSILL AST
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( HashRef InstanceOf );
 use ANSILL::Color;

@@ -1,6 +1,8 @@
 package ANSILL::Color;
 # ABSTRACT: Color parsing, naming, and degradation for ANSILL
 
+our $VERSION = '0.001';
+
 use Moo;
 use Types::Standard qw( Str Int HashRef );
 use Carp qw( croak );
