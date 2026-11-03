@@ -13,6 +13,15 @@ has grid => (
   required => 1,
 );
 
+# The JSON encoders decide number or string from the scalar's flags, and a
+# value that came out of a regex capture keeps its string flag when it is only
+# used as a number. Adding zero yields a pure number, so the contract (numbers
+# for sizes and ANSI16 indices) holds with every encoder and version.
+sub _color {
+  my ($color) = @_;
+  return ref $color ? $color : 0 + $color;
+}
+
 sub emit {
   my ($self) = @_;
   my $grid = $self->grid;
@@ -24,8 +33,8 @@ sub emit {
       my $cell = $grid->get($x, $y);
       my %c = (
         glyph => $cell->glyph,
-        fg    => $cell->fg,
-        bg    => $cell->bg,
+        fg    => _color($cell->fg),
+        bg    => _color($cell->bg),
       );
       $c{bold}      = 1 if $cell->bold;
       $c{dim}       = 1 if $cell->dim;
@@ -39,8 +48,8 @@ sub emit {
   }
 
   return encode_json({
-    width  => $grid->width,
-    height => $grid->height,
+    width  => 0 + $grid->width,
+    height => 0 + $grid->height,
     cells  => \@rows,
   });
 }

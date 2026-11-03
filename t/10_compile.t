@@ -4,6 +4,7 @@ use warnings;
 use utf8;
 use Test::More;
 use ANSILL;
+use JSON::MaybeXS ();
 
 my $source = <<'ANSILL';
 ansill 0.2
@@ -41,6 +42,21 @@ ANSILL
   my $output = $ansill->compile;
   like $output, qr/"width":20/, 'json has width';
   like $output, qr/"cells"/, 'json has cells';
+
+  # sizes and colours are JSON numbers: a string would re-encode quoted
+  my $data = JSON::MaybeXS::decode_json($output);
+  my $cell = $data->{cells}[0][0];
+  for my $pair (
+    [ width  => $data->{width}  ],
+    [ height => $data->{height} ],
+    [ fg     => $cell->{fg}     ],
+    [ bg     => $cell->{bg}     ],
+  ) {
+    my ($name, $value) = @$pair;
+    is JSON::MaybeXS::encode_json([$value]), "[$value]", "json $name is a number";
+  }
+  is $data->{width}, 20, 'json width value';
+  is $data->{height}, 5, 'json height value';
 }
 
 # HTML backend
