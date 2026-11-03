@@ -7,7 +7,6 @@ briefing:
     - ansill-core
     - getty-perl-core
     - getty-perl-moo
-    - getty-perl-distribution
     - kanban-issues-karr-ticket
 ---
 
@@ -63,9 +62,8 @@ perl -Ilib bin/ansill validate examples/panel_info.ansill
 `prove -l` is mandatory: without it the installed `ANSILL` release is loaded
 instead of `lib/`, and a green run then says nothing about your change.
 
-`dzil build` and `dzil test` currently abort — the distribution has no
-`LICENSE` file. That is a known gap, not a defect of your change; report it
-and work with `prove -l t/`.
+`DZIL_DOCKER_API_SKIP=1 dzil test` runs the suite against the built
+distribution; use it before you report.
 
 ## Out of lane
 

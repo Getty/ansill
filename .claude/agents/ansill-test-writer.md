@@ -60,9 +60,8 @@ prove -lv t/05_parser.t   # one file, verbose
 `prove -l` is mandatory: without it the installed `ANSILL` release is loaded
 instead of `lib/`, and a green run then says nothing about your change.
 
-`dzil test` currently aborts — the distribution has no `LICENSE` file. That
-is a known gap, not a defect of your test; report it and work with
-`prove -l t/`.
+`DZIL_DOCKER_API_SKIP=1 dzil test` runs the suite against the built
+distribution.
 
 ## Out of lane
 

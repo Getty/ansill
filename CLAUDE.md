@@ -10,9 +10,9 @@ one module each. **The specification is the language definition, the code is the
 implementation**; where the two differ, that is a finding for the maintainer,
 not a licence to quietly align one to the other.
 
-**`dist.ini` is the truth for the build and the release.** It carries the name
-and the `[@Author::GETTY]` bundle; `cpanfile` is generated from it and is never
-edited by hand.
+**`dist.ini` and `cpanfile` drive the build and the release.** `dist.ini`
+carries the metadata header and the `[@Author::GETTY]` bundle; `cpanfile` holds
+the prerequisites, which the bundle reads.
 
 Project knowledge — the pipeline, the cell and color model, the profiles, the
 language surface, the backends, the known drift — lives in skill `ansill-core`.
@@ -36,20 +36,20 @@ main agent delegates rather than loading them. Skill sources live under
 ## Tests
 
 ```bash
-prove -l t/               # the suite: 7 files, 107 tests
+prove -l t/               # the suite
 prove -lv t/05_parser.t   # one file, verbose
 ```
 
 `prove -l` is mandatory: without it the installed `ANSILL` release is loaded
-instead of `lib/`. `dzil build` and `dzil test` currently abort — the
-distribution has no `LICENSE` file yet.
+instead of `lib/`. `dzil test` runs the suite against the built
+distribution.
 
 ## Skills
 
 | Skill | Source | Purpose |
 |---|---|---|
 | `ansill-core` | this repository | project knowledge — architecture, language surface, known drift |
-| `getty-perl-core`, `getty-perl-moo`, `getty-perl-distribution`, `getty-git-commit-style`, `getty-git-usage`, `perl-release-dist-ini` | installed by `skilletor` | shared library conventions |
+| `getty-perl-core`, `getty-perl-moo`, `getty-git-commit-style`, `getty-git-usage`, `perl-release-dist-ini` | installed by `skilletor` | shared library conventions |
 | `kanban-issues-karr-coordination`, `kanban-issues-karr-ticket` | installed by `skilletor` | the karr board |
 
 The installed skills are build artefacts of `skilletor sync` — never edit them

@@ -120,14 +120,14 @@ compares the result against `t/expected/<name>.txt` — **every change in the
 rendering changes those reference files**, and they are only regenerated
 deliberately.
 
-**`dist.ini` is the truth.** It carries the name and the `[@Author::GETTY]`
-bundle; `cpanfile` is generated from it by the bundle's `[CPANFile]` plugin
-and is never edited by hand.
+**`dist.ini` and `cpanfile` drive the build.** `dist.ini` carries the metadata
+header and the `[@Author::GETTY]` bundle; `cpanfile` holds the prerequisites,
+which the bundle reads through `[Prereqs::FromCPANfile]`.
 
 ## House rules for this repository
 
-- **Moo with `Types::Standard` and `namespace::autoclean`** — the stack the
-  code is written in; keep new classes on it.
+- **Moo with `Types::Standard`** — the stack the code is written in; keep new
+  classes on it.
 - **`croak` for unusable input, not `die`** — the message names the offending
   value.
 - **Attributes are `is => 'ro'` unless the object mutates itself** — `Cell`,
@@ -142,11 +142,6 @@ and is never edited by hand.
 Facts about the current tree, found by reading it. Findings for the maintainer,
 not work items to repair on the side.
 
-- **The distribution does not build: there is no `LICENSE` file.**
-  `dzil build` and `dzil test` abort with `no LICENSE in the distribution:
-  run 'dzil genlicense'`. `prove -l t/` is unaffected and green.
-- **There is no `Changes` file.** The bundle's release test
-  `xt/release/changes_has_content.t` expects one.
 - **`macro` is parsed and stored, but never invoked.** Nothing expands a macro
   in the resolver or the renderer.
 - **`import` is parsed, not resolved** — the resolver carries a TODO, and the
